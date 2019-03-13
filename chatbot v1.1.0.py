@@ -1,8 +1,5 @@
 import kivy
 kivy.require('1.8.0') # replace with your current kivy version !
-"""root.x is the reference to x of the root(root app which here is MyChatBot class)
-root.top is referencing to the top of the app(here MyChatBot)
-self.height is referencig self of the widget"""
 from kivy.app import App
 from kivy.uix.widget import Widget
 
@@ -11,7 +8,10 @@ from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot import ChatBot
 
-bot=ChatBot('Training Example')
+bot=ChatBot('Training Example',logic_adapters=[
+        'chatterbot.logic.MathematicalEvaluation',
+        'chatterbot.logic.BestMatch'
+    ])
 trainer=ChatterBotCorpusTrainer(bot)
 trainer2=ListTrainer(bot)
 trainer.train("chatterbot.corpus.english","chatterbot.corpus.french")
